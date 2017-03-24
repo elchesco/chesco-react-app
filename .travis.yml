@@ -17,11 +17,17 @@ before_deploy:
   - rm temp.deb 
   - cf login -a ${CF_API} -u ${CF_USERNAME} -p ${BLUEMIX_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE} 
   - cf install-plugin autopilot -r CF-Community 
-  - yarn build 
-deploy: 
-  - edge: true 
-    provider: script 
-    script: if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cf zero-downtime-push chesco-react-app -f ./manifest.yml; else echo "PR skip deploy"; fi 
-    skip_cleanup: true 
-    on: 
+  - yarn build }
+deploy:
+  - edge: true
+    provider: script
+    script: if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cf zero-downtime-push <my-app>-staging -f ./manifest-staging.yml; else echo "PR skip deploy"; fi
+    skip_cleanup: true
+    on:
       branch: master
+  - edge: true
+    provider: script
+    script: if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cf zero-downtime-push <my-app> -f ./manifest.yml; else echo "PR skip deploy"; fi
+    skip_cleanup: true
+    on:
+      tags: true
