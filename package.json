@@ -9,14 +9,15 @@
         "compression": "^1.6.2",
         "express": "^4.15.2",
         "react": "^15.4.2",
-        "react-dom": "^15.4.2"
+        "react-dom": "^15.4.2",
+        "request": "^2.81.0"
     },
     "devDependencies": {
         "babel-watch": "^2.0.6",
         "concurrently": "^3.4.0",
         "react-scripts": "0.9.5"
     },
-    "proxy": "http://localhost:8081", 
+    "proxy": "http://localhost:8081",
     "scripts": {
         "bluemix": "babel-node index.js",
         "start": "concurrently \"PORT=8080 react-scripts start\" \"PORT=8081 babel-watch index.js\"",
